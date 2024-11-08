@@ -1,0 +1,34 @@
+100%|████████████████████████████████████████████████████████| 149631/149631 [12:54:54<00:00,  3.85it/sInvalid token IDs in predictions█████████████████████████████████████| 1670/1670 [40:50<00:00,  1.75s/it]
+{'eval_loss': 1.2387504577636719, 'eval_bleu': 0.0669034711190042, 'eval_runtime': 2457.0759, 'eval_samples_per_second': 5.437, 'eval_steps_per_second': 0.68, 'epoch': 3.0}                                    
+{'train_runtime': 48958.0657, 'train_samples_per_second': 24.45, 'train_steps_per_second': 3.056, 'train_loss': 0.8874615345482676, 'epoch': 3.0}                                                               
+100%|████████████████████████████████████████████████████████| 149631/149631 [13:35:58<00:00,  3.06it/s]
+/mnt/home/wunderky/anaconda3/envs/codegen_py310/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+100%|█████████████████████████████████████████████████████████████| 2968/2968 [1:11:42<00:00,  1.60s/it]Invalid token IDs in predictions
+100%|█████████████████████████████████████████████████████████████| 2968/2968 [1:11:50<00:00,  1.45s/it]
+{'eval_loss': 1.1586109399795532, 'eval_bleu': 0.07246148477035338, 'eval_runtime': 4313.3361, 'eval_samples_per_second': 5.505, 'eval_steps_per_second': 0.688, 'epoch': 3.0}
+Code:
+ protected final void fastPathOrderedEmit(U value, boolean delayError, Disposable disposable) {
+        final Observer<? super V> observer = downstream;
+        final SimplePlainQueue<U> q = queue;
+
+        if (wip.get() == 0 && wip.compareAndSet(0, 1)) {
+            if (q.isEmpty()) {
+                accept(observer, value);
+                if (leave(-1) == 0) {
+                    return;
+                }
+            } else {
+                q.offer(value);
+            }
+        } else {
+            q.offer(value);
+            if (!enter()) {
+                return;
+            }
+        }
+        QueueDrainHelper.drainLoop(q, observer, delayError, disposable, this);
+    }
+
+Generated Comment:
+ Call this method when you have processed a path that is not already present in the queue. This method is only called when you are sure to do so. value the value delayError the delay error disposable the disposable

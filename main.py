@@ -66,14 +66,14 @@ def filter_and_preprocess(dataset):
     return dataset
 
 # Filter and preprocess datasets
-#train_dataset = filter_and_preprocess(train_dataset)
-#valid_dataset = filter_and_preprocess(valid_dataset)
-#test_dataset = filter_and_preprocess(test_dataset)
+train_dataset = filter_and_preprocess(train_dataset)
+valid_dataset = filter_and_preprocess(valid_dataset)
+test_dataset = filter_and_preprocess(test_dataset)
 
 # Sample 10% of the dataset
-train_dataset = train_dataset.shuffle(seed=42).select(range(int(0.1 * len(train_dataset))))
-valid_dataset = valid_dataset.shuffle(seed=42).select(range(int(0.1 * len(valid_dataset))))
-test_dataset = test_dataset.shuffle(seed=42).select(range(int(0.1 * len(test_dataset))))
+#train_dataset = train_dataset.shuffle(seed=42).select(range(int(0.1 * len(train_dataset))))
+#valid_dataset = valid_dataset.shuffle(seed=42).select(range(int(0.1 * len(valid_dataset))))
+#test_dataset = test_dataset.shuffle(seed=42).select(range(int(0.1 * len(test_dataset))))
 
 
 # Load tokenizer and model

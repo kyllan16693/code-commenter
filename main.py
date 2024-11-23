@@ -32,7 +32,7 @@ print("Torch version:", torch.__version__)
 
 
 # Load the dataset
-dataset = load_dataset("code_search_net", "java")
+dataset = load_dataset("code_search_net", "python")
 train_dataset = dataset['train']
 valid_dataset = dataset['validation']
 test_dataset = dataset['test']

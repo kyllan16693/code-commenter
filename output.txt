@@ -1,34 +1,159 @@
-100%|████████████████████████████████████████████████████████| 149631/149631 [12:54:54<00:00,  3.85it/sInvalid token IDs in predictions█████████████████████████████████████| 1670/1670 [40:50<00:00,  1.75s/it]
-{'eval_loss': 1.2387504577636719, 'eval_bleu': 0.0669034711190042, 'eval_runtime': 2457.0759, 'eval_samples_per_second': 5.437, 'eval_steps_per_second': 0.68, 'epoch': 3.0}                                    
-{'train_runtime': 48958.0657, 'train_samples_per_second': 24.45, 'train_steps_per_second': 3.056, 'train_loss': 0.8874615345482676, 'epoch': 3.0}                                                               
-100%|████████████████████████████████████████████████████████| 149631/149631 [13:35:58<00:00,  3.06it/s]
-/mnt/home/wunderky/anaconda3/envs/codegen_py310/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
-  warnings.warn('Was asked to gather along dimension 0, but all '
-100%|█████████████████████████████████████████████████████████████| 2968/2968 [1:11:42<00:00,  1.60s/it]Invalid token IDs in predictions
-100%|█████████████████████████████████████████████████████████████| 2968/2968 [1:11:50<00:00,  1.45s/it]
-{'eval_loss': 1.1586109399795532, 'eval_bleu': 0.07246148477035338, 'eval_runtime': 4313.3361, 'eval_samples_per_second': 5.505, 'eval_steps_per_second': 0.688, 'epoch': 3.0}
-Code:
- protected final void fastPathOrderedEmit(U value, boolean delayError, Disposable disposable) {
-        final Observer<? super V> observer = downstream;
-        final SimplePlainQueue<U> q = queue;
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Model Summary:
+T5ForConditionalGeneration(
+  (shared): Embedding(32128, 768)
+  (encoder): T5Stack(
+    (embed_tokens): Embedding(32128, 768)
+    (block): ModuleList(
+      (0): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+              (relative_attention_bias): Embedding(32, 12)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseActDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+              (act): ReLU()
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (1-11): 11 x T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseActDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+              (act): ReLU()
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (final_layer_norm): T5LayerNorm()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (decoder): T5Stack(
+    (embed_tokens): Embedding(32128, 768)
+    (block): ModuleList(
+      (0): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+              (relative_attention_bias): Embedding(32, 12)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseActDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+              (act): ReLU()
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (1-11): 11 x T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseActDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+              (act): ReLU()
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (final_layer_norm): T5LayerNorm()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (lm_head): Linear(in_features=768, out_features=32128, bias=False)
+)
 
-        if (wip.get() == 0 && wip.compareAndSet(0, 1)) {
-            if (q.isEmpty()) {
-                accept(observer, value);
-                if (leave(-1) == 0) {
-                    return;
-                }
-            } else {
-                q.offer(value);
-            }
-        } else {
-            q.offer(value);
-            if (!enter()) {
-                return;
-            }
-        }
-        QueueDrainHelper.drainLoop(q, observer, delayError, disposable, this);
-    }
 
-Generated Comment:
- Call this method when you have processed a path that is not already present in the queue. This method is only called when you are sure to do so. value the value delayError the delay error disposable the disposable
+Total parameters: 222903552
+Trainable parameters: 222903552
+Model size (bytes): 894957938
+Model size (MB): 853.50 MB
+
+
+Generating predictions on the test dataset...
+You're using a T5TokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Downloading builder script: 100%|█████████████████████████████████████████| 5.94k/5.94k [00:00<00:00, 2.98MB/s]
+Downloading extra modules: 4.07kB [00:00, 2.33MB/s]                                                            
+Downloading extra modules: 100%|██████████████████████████████████████████| 3.34k/3.34k [00:00<00:00, 2.01MB/s]
+Downloading builder script: 100%|█████████████████████████████████████████| 6.27k/6.27k [00:00<00:00, 2.69MB/s]
+BLEU Score: 0.9948
+ROUGE Scores:
+  rouge1: 0.9972
+  rouge2: 0.9949
+  rougeL: 0.9971
+  rougeLsum: 0.9971
+Exact Match Accuracy: 0.9514

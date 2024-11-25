@@ -50,7 +50,7 @@ print(f"Model size (MB): {model_size / (1024*1024):.2f} MB")
 print("\n")
 
 # Load the test dataset
-dataset = load_dataset("code_search_net", "python")
+dataset = load_dataset("code_search_net", "python", streaming=True)
 test_dataset = dataset['test']
 
 # Define preprocessing functions
@@ -173,66 +173,3 @@ for key in rouge_result.keys():
 exact_matches = [int(pred.strip() == ref.strip()) for pred, ref in zip(all_predictions, all_references)]
 accuracy = sum(exact_matches) / len(exact_matches)
 print(f"Exact Match Accuracy: {accuracy:.4f}")
-
-# Compute word-level precision, recall, and F1
-print("\nComputing word-level precision, recall, and F1 scores...")
-tokenized_preds = [word_tokenize(pred.lower()) for pred in all_predictions]
-tokenized_refs = [word_tokenize(ref.lower()) for ref in all_references]
-
-precisions = []
-recalls = []
-f1s = []
-
-for pred_tokens, ref_tokens in zip(tokenized_preds, tokenized_refs):
-    # Create sets of tokens
-    pred_set = set(pred_tokens)
-    ref_set = set(ref_tokens)
-
-    # Compute true positives, false positives, false negatives
-    tp = len(pred_set & ref_set)
-    fp = len(pred_set - ref_set)
-    fn = len(ref_set - pred_set)
-
-    # Compute precision, recall, f1
-    if tp + fp > 0:
-        precision = tp / (tp + fp)
-    else:
-        precision = 0.0
-    if tp + fn > 0:
-        recall = tp / (tp + fn)
-    else:
-        recall = 0.0
-    if precision + recall > 0:
-        f1 = 2 * precision * recall / (precision + recall)
-    else:
-        f1 = 0.0
-
-    precisions.append(precision)
-    recalls.append(recall)
-    f1s.append(f1)
-
-avg_precision = np.mean(precisions)
-avg_recall = np.mean(recalls)
-avg_f1 = np.mean(f1s)
-
-print(f"Average Precision: {avg_precision:.4f}")
-print(f"Average Recall: {avg_recall:.4f}")
-print(f"Average F1 Score: {avg_f1:.4f}")
-
-# Provide a few examples
-print("\nExamples with generated comments:")
-num_examples = 5
-
-for i in range(num_examples):
-    code_snippet = test_dataset[i]['func_code_string']
-    true_comment = test_dataset[i]['func_documentation_string']
-    generated_comment = all_predictions[i]
-
-    print(f"\nExample {i+1}:")
-    print("Code Snippet:")
-    print(code_snippet)
-    print("\nTrue Comment:")
-    print(true_comment)
-    print("\nGenerated Comment:")
-    print(generated_comment)
-    print("-" * 80)

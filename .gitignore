@@ -1,2 +1,2 @@
-results
-final_model/pytorch_model.bin
+*pytorch_model.bin
+__pycache__/
